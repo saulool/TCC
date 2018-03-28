@@ -1,0 +1,22 @@
+<div class="login-background">
+	<div class="login-container">
+		<form class="login-form" ng-submit="loginCtrl.login(loginCtrl.email, loginCtrl.senha)">
+			<div class="logo">
+				<div class="logo-outer">
+					<div class="logo-inner">F</div>
+				</div>
+				<span>Family Budget</span>
+			</div>
+			<div class="error-dialog" ng-class="{'hide-dialog': !loginCtrl.error.hasError}">
+				{{loginCtrl.error.message}}
+			</div>
+			<input class="field" type="text" placeholder="E-mail" ng-model="loginCtrl.email" />
+			<input class="field" type="password" ng-model="loginCtrl.senha" placeholder="Senha" />
+			<button class="btn-primary" type="submit">Login</button>
+			<div class="links-container">
+				<a class="link" ui-sref="cadastro">Não possui conta?</a>
+				<a class="link" ui-sref="recuperarDados">Esqueceu seus dados de acesso?</a>
+			</div>
+		</form>
+	</div>
+</div>

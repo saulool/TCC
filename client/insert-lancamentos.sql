@@ -1,0 +1,12 @@
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Lançamento inicial da conta', 'R', 'OUTROS', 54381.33, 54381.33, '2017/08/03');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Mercado', 'D', 'ALIMENTACAO', 118.98, 54262.35, '2017/08/04');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Passeio', 'D', 'LAZER', 257.33, 54005.02, '2017/08/07');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Conta de telefone e internet', 'D', 'CONTAS', 100.45, 53904.57, '2017/08/10');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Conta de luz', 'D', 'CONTAS', 153.21, 53751.36, '2017/08/10');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Consulta médica', 'D', 'SAUDE', 250, 53501.36, '2017/08/12');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Faculdade', 'D', 'EDUCACAO', 2139.22, 51362.14, '2017/08/15');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Condomínio', 'D', 'CONTAS', 350, 51012.14, '2017/08/15');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Recebimento de aluguel', 'R', 'ALUGUEL', 1300, 52312.14, '2017/08/15');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Combustível', 'D', 'LOCOMOCAO', 148.69, 52163.45, '2017/08/20');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Presente', 'D', 'OUTROS', 219.99, 51943.46, '2017/08/23');
+INSERT INTO public.lancamentos(id_usuario, descricao, tipo, natureza, valor, saldo, data)	VALUES (1, 'Mercado', 'D', 'ALIMENTACAO', 57.76, 51885.7, '2017/08/26');

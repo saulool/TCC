@@ -1,0 +1,19 @@
+{
+  "name": "tcc-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "mysql-promise": "^4.1.0",
+    "pg-promise": "^8.2.2"
+  },
+  "devDependencies": {},
+  "description": ""
+}

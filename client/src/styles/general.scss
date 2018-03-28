@@ -1,0 +1,46 @@
+@function spacing($sizeMultiplier) {
+  $defaultSize: 10px;
+
+  @return round($defaultSize*$sizeMultiplier);
+}
+
+.btn-primary {
+	width: 100%;
+    border: 0;
+    background: #80d0c7;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    border-radius: 3px;
+    height: 35px;
+}
+
+.field {
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	padding: spacing(.5);
+	color: #333;
+	margin-bottom: spacing(1);
+}
+
+.content{
+	&.enabled {
+		padding: 20px;
+		margin-top: 50px;
+	}
+}
+
+.form-horizontal .form-group {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.center-text {
+	text-align: center;
+}
+
+input.ng-invalid:not(.ng-pristine) {
+	border-color: red;
+}

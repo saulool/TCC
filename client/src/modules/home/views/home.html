@@ -1,0 +1,34 @@
+<div class="all">
+	<div class="charts">
+		<div class="expenses-pie-chart">
+			<canvas id="pie" class="chart chart-pie"
+			  chart-data="homeCtrl.expensesChart.data.values" chart-labels="homeCtrl.expensesChart.data.labels" chart-options="homeCtrl.expensesChart.options">
+			</canvas>
+		</div>
+		<div class="account-balance-chart">
+			<canvas id="line" height="100" class="chart chart-line" chart-data="homeCtrl.accountBalanceChart.data.values"
+			chart-labels="homeCtrl.accountBalanceChart.data.labels" chart-series="homeCtrl.accountBalanceChart.data.series" chart-options="homeCtrl.accountBalanceChart.options"
+			chart-dataset-override="datasetOverride" chart-click="onClick">
+			</canvas>
+		</div>
+	</div>
+	<div class="tabular-data">
+		<h1>Últimos lançamentos</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th>Natureza</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="expense in homeCtrl.lastExpenses">
+					<td>{{expense.date}}</td>
+					<td>{{expense.type}}</td>
+					<td>{{expense.cost}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

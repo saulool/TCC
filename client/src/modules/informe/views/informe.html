@@ -1,0 +1,29 @@
+<div class="tabular-data">
+  <h1>Informativo IR - Ano fiscal {{informeCtrl.anoFiscal}}</h1>
+  <h4>Despesas restituíveis</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Descrição</th>
+        <th>Natureza</th>
+        <th>CNPJ</th>
+        <th>Nome CNPJ</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-if="informeCtrl.despesasRestituiveis.length > 0" ng-repeat="despesa in informeCtrl.despesasRestituiveis">
+        <td>{{despesa.data}}</td>
+        <td>{{despesa.descricao}}</td>
+        <td>{{despesa.natureza}}</td>
+        <td>{{despesa.cnpj}}</td>
+        <td>{{despesa.nomeCnpj}}</td>
+        <td>{{despesa.valor}}</td>
+      </tr>
+      <tr ng-if="informeCtrl.despesasRestituiveis.length == 0">
+        <td colspan="6" class="center-text">Não foram encontrados lançamentos dedutíveis para o IR</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

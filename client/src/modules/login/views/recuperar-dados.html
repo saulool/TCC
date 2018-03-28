@@ -1,0 +1,17 @@
+<div>
+	<div class="col-sm-6 col-sm-offset-3">
+	<h3>Insira seu e-mail</h3>
+	<div class="error-dialog" ng-class="{'hide-dialog': !recuperarDadosCtrl.error.hasError}">
+		{{recuperarDadosCtrl.error.message}}
+	</div>
+	  <form name="formRecuperarDados" ng-submit="recuperarDadosCtrl.recuperarDados(recuperarDadosCtrl.email)" novalidate>
+	    <div class="form-group">
+		  	<input type="email" class="form-control" placeholder="E-mail*" name="email" ng-model="recuperarDadosCtrl.email" required>
+			</div>
+	    <div class="form-group">
+	      <button type="submit" class="btn-primary" ng-disabled="!recuperarDadosCtrl.email">Recuperar Dados</button>
+	    </div>
+	  </form>
+	  <a ui-sref="login">Voltar</a>
+	</div>
+</div>

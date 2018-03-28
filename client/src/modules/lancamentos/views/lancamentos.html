@@ -1,0 +1,63 @@
+<div class="col-sm-6 col-sm-offset-3">
+<h3>Lançamentos</h3>
+<div class="alert alert-danger" ng-if="lancamentosCtrl.error.hasError">
+    {{lancamentosCtrl.error.message}}
+  </div>
+<form class="form-horizontal" name="lancamentosForm" ng-submit="lancamentosCtrl.cadastrar(lancamentosForm)" novalidate>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Descrição*" ng-model="lancamentosCtrl.form.descricao" required>
+  </div>
+  <div class="form-group">
+    <select class="form-control" ng-model="lancamentosCtrl.form.tipo" ng-change="lancamentosCtrl.limparNaturezaLancamento()" required>
+		  <option ng-repeat="tipoLancamento in lancamentosCtrl.tiposLancamentos" value="{{tipoLancamento}}">{{ tipoLancamento }}</option>
+		</select>
+  </div>
+  <div class="form-group col-md-6">
+    <input type="date" class="form-control" placeholder="Data*" ng-model="lancamentosCtrl.form.data" required>
+  </div>
+  <div class="form-group col-md-6">
+    <input type="text" class="form-control" placeholder="Horário*" ng-model="lancamentosCtrl.form.hora" required>
+  </div>
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-addon">R$</div>
+      <input type="text" class="form-control" placeholder="Valor*" ng-model="lancamentosCtrl.form.valor" ui-money-mask currency-symbol="" required>
+    </div>
+  </div>
+  <div ng-if="lancamentosCtrl.form.tipo == lancamentosCtrl.TIPOS_LANCAMENTOS.D && (lancamentosCtrl.form.natureza == lancamentosCtrl.CATEGORIAS_LANCAMENTOS.SAUDE || lancamentosCtrl.form.natureza == lancamentosCtrl.CATEGORIAS_LANCAMENTOS.EDUCACAO)" class="alert alert-warning" role="alert"><b>Atenção</b>: Todas as despesas de saúde e algumas de educação podem ser deduzidas no seu IR. Para isso, será necessário preencher o CNPJ do beneficiário.</div>
+  <div class="form-group">
+		<select class="form-control" ng-model="lancamentosCtrl.form.natureza" ng-if="lancamentosCtrl.form.tipo == lancamentosCtrl.TIPOS_LANCAMENTOS.R" required>
+		  <option disabled selected value="">Natureza Lançamento*</option>
+		  <option ng-repeat="tipoReceita in lancamentosCtrl.tiposReceita" value="{{tipoReceita}}">{{ tipoReceita }}</option>
+		</select>
+
+		<select class="form-control" ng-model="lancamentosCtrl.form.natureza" ng-if="lancamentosCtrl.form.tipo == lancamentosCtrl.TIPOS_LANCAMENTOS.D" required>
+		  <option disabled selected value="">Natureza Lançamento*</option>
+		  <option ng-repeat="tipoDespesa in lancamentosCtrl.tiposDespesas track by $index" value="{{tipoDespesa}}">{{ tipoDespesa }}</option>
+		</select>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="CNPJ" ng-model="lancamentosCtrl.form.cnpj" ui-br-cnpj-mask>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Nome CNPJ" ng-model="lancamentosCtrl.form.nomeCnpj">
+  </div>
+
+  <div class="form-group">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="lancamentosCtrl.form.lancamentoRecorrente"> Lançamento Recorrente
+      </label>
+    </div>
+  </div>
+  <div class="form-group" ng-if="lancamentosCtrl.form.lancamentoRecorrente">
+    <div class="input-group">
+      <input type="number" class="form-control" placeholder="Frequência*" ng-model="lancamentosCtrl.form.frequencia">
+      <div class="input-group-addon">meses</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn-primary">Cadastrar</button>
+  </div>
+</form>
+</div>

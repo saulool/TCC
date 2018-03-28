@@ -1,0 +1,20 @@
+.all {
+	height: 200px;
+}
+
+.charts {
+	white-space: nowrap;
+	display: flex;
+	width: 100%;
+	height: 300px;
+
+	.expenses-pie-chart {
+		width: 35%;
+		margin-right: 3%;
+		vertical-align: middle;
+	}
+
+	.account-balance-chart {
+		width: 55%;
+	}
+}

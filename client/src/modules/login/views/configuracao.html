@@ -1,0 +1,21 @@
+<div>
+	<div class="col-sm-6 col-sm-offset-3">
+		<h3>Deseja inserir um valor inicial em sua carteira?</h3>
+		<div class="acoes" ng-if="!configuracaoCtrl.mostraForm">
+			<button ng-click="configuracaoCtrl.mostrarForm()">Sim</button>
+			<button ng-click="configuracaoCtrl.redirecionarHome()">Não</button>
+		</div>
+	  <form name="formConfiguracao" ng-submit="configuracaoCtrl.configurar(formConfiguracao)" ng-if="configuracaoCtrl.mostraForm" novalidate>
+	    <div class="alert alert-danger" ng-if="configuracaoCtrl.form.error.hasError" role="alert">{{configuracaoCtrl.form.error.message}}</div>
+	    <div class="form-group">
+		    <div class="input-group">
+		      <div class="input-group-addon">R$</div>
+		      <input type="text" class="form-control" placeholder="Valor" ng-model="configuracaoCtrl.valorInicial" ui-money-mask currency-symbol="" required>
+		    </div>
+			</div>
+	    <div class="form-group">
+	      <button type="submit" class="btn-primary" ng-disabled="!configuracaoCtrl.valorInicial">Inserir valor inicial</button>
+	    </div>
+	  </form>
+	</div>
+</div>

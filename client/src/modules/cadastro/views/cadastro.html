@@ -1,0 +1,24 @@
+<div class="col-sm-6 col-sm-offset-3">
+  <h3>Cadastro de conta</h3>
+  <form class="form-horizontal" name="cadastroForm" ng-submit="cadastroCtrl.cadastrarUsuario(cadastroForm)" novalidate>
+    <div class="alert alert-danger" ng-if="cadastroCtrl.form.error.hasError" role="alert">{{cadastroCtrl.form.error.message}}</div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Nome*" ng-model="cadastroCtrl.form.nome" required>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Sobrenome*" ng-model="cadastroCtrl.form.sobrenome" required>
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" placeholder="E-mail*" ng-model="cadastroCtrl.form.email" required>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Senha*" ng-model="cadastroCtrl.form.senha" required>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': cadastroCtrl.form.senha != cadastroCtrl.form.confirmacaoSenha }">
+      <input type="password" class="form-control" placeholder="Confirmar senha*" ng-model="cadastroCtrl.form.confirmacaoSenha" required>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn-primary">Cadastrar conta</button>
+    </div>
+  </form>
+</div>

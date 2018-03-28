@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Family Budget</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Sample Frontend webapp Project"/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <base href="/">
+  </head>
+
+  <body ng-app="app" ng-controller="generalController">
+    <nav class="navbar navbar-default navbar-fixed-top" ng-if=!paginaLogin>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a ui-sref="home" class="navbar-brand">Family Budget</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+          <ul class="nav navbar-nav">
+            <li>
+              <a ui-sref="lancamentos">Lançamentos</a>
+            </li>
+            <li>
+              <a href="#">Situação Financeira</a>
+            </li>
+            <li>
+              <a href="#">Lançamentos Futuros</a>
+            </li>
+            <li>
+              <a href="#">Simular Investimentos</a>
+            </li>
+            <li>
+              <a ui-sref="informe">Informe IR</a>
+            </li>
+            <li>
+              <a href="#">Conectar à Conta</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>Meu saldo: {{ saldo }}</a></li>
+            <li><a ng-click="logout()" href="#">Sair</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div ui-view class="content" ng-class="{enabled: !paginaLogin}"></div>
+  </body>
+</html>
