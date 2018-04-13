@@ -6,8 +6,10 @@ module.exports = (app) => {
     	const de = req.query.de;
     	const ate = req.query.ate;
     	const ordenacao = req.query.ordenacao;
+        const tipo = req.query.tipo;
+        const idUsuario = req.query.idUsuario;
 
-        lancamentoService.getLancamentos(quantidade, de, ate, ordenacao).then((response) => {
+        lancamentoService.getLancamentos(idUsuario, quantidade, de, ate, ordenacao, tipo).then((response) => {
         	res.send(response);
         }).catch((error) => {
 			res.status(500).send(error);

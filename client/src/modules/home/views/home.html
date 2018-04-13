@@ -7,8 +7,7 @@
 		</div>
 		<div class="account-balance-chart">
 			<canvas id="line" height="100" class="chart chart-line" chart-data="homeCtrl.accountBalanceChart.data.values"
-			chart-labels="homeCtrl.accountBalanceChart.data.labels" chart-series="homeCtrl.accountBalanceChart.data.series" chart-options="homeCtrl.accountBalanceChart.options"
-			chart-dataset-override="datasetOverride" chart-click="onClick">
+			chart-labels="homeCtrl.accountBalanceChart.data.labels" chart-series="homeCtrl.accountBalanceChart.data.series" chart-options="homeCtrl.accountBalanceChart.options">
 			</canvas>
 		</div>
 	</div>
@@ -19,14 +18,16 @@
 				<tr>
 					<th>Data</th>
 					<th>Natureza</th>
+					<th>Descrição</th>
 					<th>Valor</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="expense in homeCtrl.lastExpenses">
-					<td>{{expense.date}}</td>
-					<td>{{expense.type}}</td>
-					<td>{{expense.cost}}</td>
+				<tr ng-repeat="despesa in homeCtrl.ultimasDespesas">
+					<td>{{despesa.data}}</td>
+					<td>{{despesa.natureza}}</td>
+					<td>{{despesa.descricao}}</td>
+					<td>{{despesa.valor}}</td>
 				</tr>
 			</tbody>
 		</table>

@@ -11,11 +11,11 @@ export default function LancamentosController(LancamentoService, TIPOS_LANCAMENT
 
 	vm.error = null;
 
-	const throwError = (error) => {
+	const lancarErro = (error) => {
 		vm.error = error;
 	}
 
-	const clearError = () => {
+	const limparErro = () => {
 		vm.error = {
 			hasError: false,
 			message: null
@@ -26,7 +26,7 @@ export default function LancamentosController(LancamentoService, TIPOS_LANCAMENT
 		descricao: null,
 		tipo: TIPOS_LANCAMENTOS.D,
 		data: moment().toDate(),
-		hora: moment().format('HH:mm'),
+		hora: moment().seconds(0).milliseconds(0).toDate(),
 		valor: null,
 		natureza: null,
 		cnpj: null,
@@ -78,32 +78,46 @@ export default function LancamentosController(LancamentoService, TIPOS_LANCAMENT
 		vm.form.naturezaLancamento = null;
 	}
 
-	const formatarData = (dia, hora) => {
-		return `${moment(dia).format('YYYY-MM-DD')} ${moment(hora, 'h:mm').format('HH:mm:ss')}`;
+	const formatarData = (dia, hora, recorrencia) => {
+		return `${moment(dia).add(recorrencia, 'month').format('YYYY-MM-DD')} ${moment(hora, 'h:mm').format('HH:mm:ss')}`;
 	}
 
-	const montarLancamento = (lancamento) => {
-		return [{
+	const montarLancamento = (lancamento, recorrencia) => {
+		return {
 			idUsuario: usuario.id,
 			descricao: lancamento.descricao,
 			tipo: converteValorKey(TIPOS_LANCAMENTOS, lancamento.tipo),
-			data: formatarData(lancamento.data, lancamento.hora),
+			data: formatarData(lancamento.data, lancamento.hora, recorrencia),
 			valor: lancamento.valor,
 			natureza: converteValorKey(CATEGORIAS_LANCAMENTOS, lancamento.natureza),
 			cnpj: lancamento.cnpj,
 			nomeCnpj: lancamento.nomeCnpj
-		}]
+		}
+	}
+
+	const montarLancamentos = (lancamento, recorrencia = 1) => {
+		let lancamentos = [];
+
+		for(let recorrenciaAtual=0; recorrenciaAtual<recorrencia; recorrenciaAtual++){
+			lancamentos.push(montarLancamento(lancamento, recorrenciaAtual))
+		}
+
+		return lancamentos;
 	}
 
 	vm.cadastrar = (form) => {
+		limparErro();
+
 		if(form.$valid){
-			const lancamentos = vm.form.lancamentoRecorrente ? montarLancamentos() : montarLancamento(vm.form);
+			const lancamentos = vm.form.lancamentoRecorrente ? montarLancamentos(vm.form, vm.form.frequencia) : montarLancamentos(vm.form, 1);
 
 			LancamentoService.cadastrar(lancamentos).then(() => {
 				//limparForm();
 			}).catch((error) => {
-				throwError(errorUtils.handleError(error));
+				lancarErro(errorUtils.handleError(error));
 			});
+		}else{
+			lancarErro(new errorUtils.Error(true, 'Preencha o formulário corretamente'));
 		}
 	}
 }

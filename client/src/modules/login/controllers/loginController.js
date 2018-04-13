@@ -25,12 +25,13 @@ export default function LoginController($state, UsuarioService, localStorageServ
 			const usuario = responseData.data;
 			localStorageService.set('usuario', usuario);
 
-			if(usuario.novoUsuario){
-				$state.go('configuracao');
-			}else{
+			// if(usuario.novoUsuario){
+			// 	$state.go('configuracao');
+			// }else{
 				$rootScope.$broadcast('LOGIN');
+				console.log(123);
 				$state.go('home');
-			}
+			//}
 		}).catch((error) => {
 			throwError(errorUtils.handleError(error));
 		});

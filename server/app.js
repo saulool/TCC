@@ -34,6 +34,7 @@ app.get('/', function(request, response) {
 
 require(global.__base + 'modules/Usuario/routes')(app);
 require(global.__base + 'modules/Lancamento/routes')(app);
+require(global.__base + 'modules/Investimento/routes')(app);
 
 app.listen(process.env.PORT || 3000, function () {
     console.log(`Application started on port ${process.env.PORT || 3000}`);

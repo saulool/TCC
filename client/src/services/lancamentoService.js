@@ -11,8 +11,10 @@ export default function LancamentoService($http) {
     	});
     }
 
-    vm.getUltimoSaldo = (idUsuario) => {
-    	return $http.get(`${configuration.serverUrl}/api/lancamento/${idUsuario}/ultimo-saldo`);
+    vm.getLancamentos = (filtros) => {
+        return $http.get(`${configuration.serverUrl}/api/lancamentos`, {
+            params: filtros
+        });
     }
 
     vm.getLancamentosIR = (idUsuario) => {

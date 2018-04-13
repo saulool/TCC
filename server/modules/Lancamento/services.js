@@ -2,12 +2,14 @@ const errorHandler = require('../Utils/error-handler');
 const lancamentoIntegration = require('./integration');
 const usuarioService = require('../Usuario/services');
 
-const getLancamentos = (quantidade, de = '1900/01/01', ate = '2100/01/01', ordenacao = 'ASC') => {
+const getLancamentos = (idUsuario, quantidade, de = '1900/01/01', ate = '2100/01/01', ordenacao = 'ASC', tipo) => {
 	let filtros = {
+		idUsuario,
 		quantidade,
 		ordenacao,
 		de,
-		ate
+		ate,
+		tipo
 	}
 
 	return new Promise((resolve, reject) => {
@@ -41,11 +43,7 @@ const cadastrar = (lancamentos) => {
 		let promises = [];
 
 		lancamentos.forEach((lancamento) => {
-			promises.push(
-				lancamentoIntegration.cadastrar(lancamento).then(() => {
-					usuarioService.atualizarSaldo(lancamento.idUsuario, lancamento.tipo, lancamento.valor)
-				})
-			);
+			promises.push(lancamentoIntegration.cadastrar(lancamento));
 		});
 
 		Promise.all(promises).then((response) => {

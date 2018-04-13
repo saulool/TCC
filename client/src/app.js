@@ -4,32 +4,35 @@ import Home from '/src/modules/home';
 import Lancamentos from '/src/modules/lancamentos';
 import Informe from '/src/modules/informe';
 import Cadastro from '/src/modules/cadastro';
-import * as currencyFormatter from 'currencyFormatter.js';
+import Investimentos from '/src/modules/investimentos';
+import moment from 'moment';
+
+moment().locale('pt-br');
 
 angular
-	.module('app', [Login, Home, Lancamentos, Informe, Cadastro, 'LocalStorageModule', 'chart.js', 'ui.utils.masks'])
+	.module('app', [Login, Home, Lancamentos, Informe, Cadastro, Investimentos, 'LocalStorageModule', 'chart.js', 'ui.utils.masks'])
 	.controller('generalController', ($scope, localStorageService, $state, $rootScope) => {
 
 		if(localStorageService.get('usuario')){
-			$scope.saldo = currencyFormatter.format(localStorageService.get('usuario').saldo, { currency: 'BRL' });
+			//$scope.saldo = currencyFormatter.format(localStorageService.get('usuario').saldo, { currency: 'BRL' });
 			
-			if(localStorageService.get('usuario').novoUsuario){
-				$scope.paginaLogin = true;
-			}else{
-				$scope.paginaLogin = false;
-			}
+			//if(localStorageService.get('usuario').novoUsuario){
+			//	$scope.paginaLogin = true;
+			// }else{
+			 	$scope.paginaLogin = false;
+			// }
 		}else{
 			$scope.paginaLogin = true;
 		}
 
 		$rootScope.$on('LOGIN', () => {
 			$scope.paginaLogin = false;
-			$scope.saldo = currencyFormatter.format(localStorageService.get('usuario').saldo, { currency: 'BRL' });
+			//$scope.saldo = currencyFormatter.format(localStorageService.get('usuario').saldo, { currency: 'BRL' });
 		});
 
 		$rootScope.$on('LOGOUT', () => {
 			$scope.paginaLogin = true;
-			$scope.saldo = null;
+			//$scope.saldo = null;
 		})
 
 		$scope.logout = () => {
@@ -42,12 +45,12 @@ angular
 	  $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
 	  	switch(toState.name){
 	  		case 'login': 
-	  			if(localStorageService.get('usuario') && !localStorageService.get('usuario').novoUsuario) $state.go('home')
+	  			if(localStorageService.get('usuario')) $state.go('home')
 	  		case 'configuracao': return;
 	  		case 'cadastro': return;
 	  		case 'recuperarDados': break;
 	  		default:
-	  			if(!localStorageService.get('usuario') || localStorageService.get('usuario').novoUsuario) $state.go('login')
+	  			if(!localStorageService.get('usuario')) $state.go('login')
 	  	}
 	  })
 	}])
