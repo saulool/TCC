@@ -1,57 +1,62 @@
-<div ng-if="investimentosCtrl.passoSimulacao == 1" class="passo1">
-  <h1>Simular investimentos</h1>
-  <h4>Selecione um investimento para simular</h4>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Instituição Financeira</th>
-        <th>Investimento</th>
-        <th>Taxa</th>
-        <th>Indexação</th>
-        <th>Data Resgate</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="investimento in investimentosCtrl.investimentos">
-        <td><input ng-click="investimentosCtrl.selecionarInvestimento(investimento)" type="radio"></td>
-        <td>{{investimento.instituicao}}</td>
-        <td>{{investimento.nome}}</td>
-        <td>{{investimento.taxa}}%</td>
-        <td>{{investimento.indexacao}}</td>
-        <td>{{investimento.vencimentoFormatado}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <button class="btn-primary" ng-click="investimentosCtrl.avancarPasso()">Avançar</button>
-</div>
-<div ng-if="investimentosCtrl.passoSimulacao == 2" class="passo2">
-  <h1>{{investimentosCtrl.investimentoSelecionado.instituicao}} - {{investimentosCtrl.investimentoSelecionado.nome}}</h1>
-  <h4>Preencha os campos abaixo</h4>
-  <form class="form-horizontal" name="investimentoForm" ng-submit="investimentosCtrl.avancarPasso(investimentoForm)" novalidate>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-addon">R$</div>
-        <input type="text" class="form-control" placeholder="Aporte inicial" ng-model="investimentosCtrl.aporteInicial" ui-money-mask currency-symbol="">
+<div class="investimento">
+  <div>
+    <h1>Simular investimentos</h1>
+    <h4>Selecione um investimento para simular</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><input ng-model="investimentosCtrl.todosSelecionados" ng-click="investimentosCtrl.selecionarTodos()" type="checkbox"></th>
+          <th>Instituição Financeira</th>
+          <th>Investimento</th>
+          <th>Taxa</th>
+          <th>Indexação</th>
+          <th>Data Resgate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="investimento in investimentosCtrl.investimentos">
+          <td><input ng-model="investimento.selecionado" ng-checked="investimento.selecionado" type="checkbox"></td>
+          <td>{{investimento.instituicao}}</td>
+          <td>{{investimento.nome}}</td>
+          <td>{{investimento.taxa}}%</td>
+          <td>{{investimento.indexacao}}</td>
+          <td>{{investimento.vencimentoFormatado}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h4>Adicione os valores de aporte inicial e mensal</h4>
+    <form class="form-horizontal" name="investimentoForm" ng-submit="investimentosCtrl.avancarPasso(investimentoForm)" novalidate>
+      <div class="col-md-6 form-group no-padding-left">
+        <label>Aporte inicial</label>
+        <div class="input-group">
+          <div class="input-group-addon">R$</div>
+          <input type="text" class="form-control" placeholder="Aporte inicial" ng-model="investimentosCtrl.aporteInicial" ui-money-mask currency-symbol="">
+        </div>
+      </div>
+      <div class="col-md-6 form-group no-padding-right">
+        <label>Aporte mensal</label>
+        <div class="input-group">
+          <div class="input-group-addon">R$</div>
+          <input type="text" class="form-control" placeholder="Aporte mensal" ng-model="investimentosCtrl.aporteMensal" ui-money-mask currency-symbol="">
+        </div>
+      </div>
+    </form>
+    <button class="btn-primary" ng-click="investimentosCtrl.simular()">Simular</button>
+  </div>
+  <div ng-if="investimentosCtrl.investimentosCalculados.length > 0">
+    <h3>Resultados</h3>
+    <div class="alert alert-warning" role="alert"><b>Atenção</b>: As simulações consideram médias históricas de mercado, que podem não se verificar na prática. As projeções das simulações são apenas
+exemplificativas, incluindo simplificações nos cálculos, não assegurando os resultados de transações passadas ou futuras. Além disso, as simulações não consideram a incidência de IOF ou taxas de corretoras.</div>
+    <div class="row">
+      <div class="resultado-investimento col-md-4" ng-repeat="investimentoCalculado in investimentosCtrl.investimentosCalculados">
+        <b>{{investimentoCalculado.nome}}</b><br>
+        <span>Valor aplicado: {{investimentoCalculado.valorAplicado}}</span><br>
+        <span>Valor bruto em {{investimentoCalculado.vencimentoFormatado}}: {{investimentoCalculado.valorBruto}}</span><br>
+        <span>Imposto a ser pago em {{investimentoCalculado.vencimentoFormatado}}: {{investimentoCalculado.impostoPago}}</span><br>
+        <span>Valor líquido em {{investimentoCalculado.vencimentoFormatado}}: {{investimentoCalculado.valorLiquido}}</span>
       </div>
     </div>
-    <div class="form-group">
-      <div class="input-group">
-        <div class="input-group-addon">R$</div>
-        <input type="text" class="form-control" placeholder="Aporte mensal" ng-model="investimentosCtrl.aporteMensal" ui-money-mask currency-symbol="">
-      </div>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn-primary">Simular</button>
-    </div>
-  </form>
-</div>
-<div ng-if="investimentosCtrl.passoSimulacao == 3" class="passo3">
-  <h1>{{investimentosCtrl.investimentoSelecionado.instituicao}} - {{investimentosCtrl.investimentoSelecionado.nome}}</h1>
-  <br>
-  <span>Valor aplicado: {{investimentosCtrl.valorAplicado}}</span><br>
-  <span>Valor bruto em {{investimentosCtrl.investimentoSelecionado.vencimento}}: {{investimentosCtrl.valorBruto}}</span><br>
-  <span>Imposto a ser pago em {{investimentosCtrl.investimentoSelecionado.vencimento}}: {{investimentosCtrl.impostoPago}}</span><br>
-  <span>Valor líquido em {{investimentosCtrl.investimentoSelecionado.vencimento}}: {{investimentosCtrl.valorLiquido}}</span>
+  </div>
 </div>

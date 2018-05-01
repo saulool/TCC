@@ -8,4 +8,14 @@ export default function InvestimentoService($http) {
     vm.getInvestimentos = () => {
     	return $http.get(`${configuration.serverUrl}/api/investimentos`);
     }
+
+    vm.calcularInvestimento = (aporteInicial, aporteMensal, vencimento, taxa, indexacao) => {
+        return $http.post(`${configuration.serverUrl}/api/investimentos/calcular`, {
+            aporteInicial,
+            aporteMensal,
+            vencimento,
+            taxa,
+            indexacao
+        });
+    }
 }

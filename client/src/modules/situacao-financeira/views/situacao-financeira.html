@@ -1,0 +1,18 @@
+<div class="situacao-financeira">
+  <h2 class="text-center">Sua situação financeira: {{ situacaoFinanceiraCtrl.pontuacao }}</h2>
+
+  <div class="progress">
+    <div class="progress-bar" ng-class="{ 'progress-bar-success' : situacaoFinanceiraCtrl.pontuacao > 69, 'progress-bar-danger' : situacaoFinanceiraCtrl.pontuacao < 40, 'progress-bar-warning' : situacaoFinanceiraCtrl.pontuacao > 39 && situacaoFinanceiraCtrl.pontuacao < 70 }" style="width: {{situacaoFinanceiraCtrl.pontuacao}}%">
+    </div>
+  </div>
+  
+  <p>Parabéns, sua situação financeira se encontra em um nível acima do estável, isso significa que você está poupando mais do que gastando.</p>
+
+
+  <h2 class="text-center">Como melhorar minha situação financeira?</h2>
+  <p>Você pode melhorar sua situação financeira através dos seguintes passos:</p>
+  <ul>
+    <li>Tente reduzir seus gastos do tipo lazer. Eles ocupam 25% do seu orçamento</li>
+    <li>Realize investimentos para maximizar seus ganhos com o dinheiro que você poupou</li>
+  </ul>
+</div>

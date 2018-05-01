@@ -1,77 +1,67 @@
 import moment from 'moment';
 import * as currencyFormatter from 'currencyFormatter.js';
 
-InvestimentosController.$inject = ['InvestimentoService'];
+InvestimentosController.$inject = ['$scope', 'InvestimentoService'];
 
-export default function InvestimentosController(InvestimentoService) {
+export default function InvestimentosController($scope, InvestimentoService) {
 	const vm = this;
 
-	vm.investimentoSelecionado = null;
+	vm.investimentosCalculados = [];
 
-	vm.selecionarInvestimento = (investimento) => vm.investimentoSelecionado = investimento;
-
-	vm.passoSimulacao = 1;
-
-	const juroCompostoSemMensalidade = (capital, taxa, tempo) => {
-		return capital * Math.pow((1 + taxa), tempo);
+	const calcularInvestimento = (investimento) => {
+		InvestimentoService.calcularInvestimento(vm.aporteInicial, vm.aporteMensal, investimento.vencimento, investimento.taxa, investimento.indexacao).then((response) => {
+			vm.investimentosCalculados.push({
+				instituicao: investimento.instituicao,
+				nome: investimento.nome,
+				taxa: investimento.taxa,
+				indexacao: investimento.indexacao,
+				vencimento: investimento.vencimento,
+				vencimentoFormatado: investimento.vencimentoFormatado,
+				selecionado: investimento.selecionado,
+				valorAplicado: currencyFormatter.format(response.data.valorAplicado, { currency: 'BRL' }),
+				valorLiquido: currencyFormatter.format(response.data.valorLiquido, { currency: 'BRL' }),
+				valorBruto: currencyFormatter.format(response.data.valorBruto, { currency: 'BRL' }),
+				impostoPago: currencyFormatter.format(response.data.impostoPago, { currency: 'BRL' })
+			});
+		});
 	}
 
-	const juroCompostoComMensalidade = (capital, taxa, tempo, mensalidade) => {
-		return capital * Math.pow((1 + taxa), tempo) + mensalidade * (Math.pow((1 + taxa), tempo) - 1) / taxa;
-	}
-
-	const calcularInvestimento = () => {
-		let investimento = vm.investimentoSelecionado;
-		let diferencaMeses = Math.floor(moment(investimento.vencimento).diff(moment(), 'months', true));
-		let diferencaDias = moment(investimento.vencimento).diff(moment(), 'days', true);
-		let taxaMensal = Math.pow((1+(investimento.taxa/100)), (1/12))-1;
-		let lucro = 0;
-		console.log(diferencaMeses);
-		vm.valorAplicado = vm.aporteInicial + (vm.aporteMensal * diferencaMeses)
-
-		if(vm.aporteMensal == 0){
-			vm.valorBruto = juroCompostoSemMensalidade(vm.aporteInicial, taxaMensal, diferencaMeses);
-			lucro = vm.valorBruto - vm.valorAplicado;
-		} else {
-			vm.valorBruto = juroCompostoComMensalidade(vm.aporteInicial, taxaMensal, diferencaMeses, vm.aporteMensal);
-			lucro = vm.valorBruto - vm.valorAplicado;
-		}
-
-		if(diferencaDias <= 180) {
-			vm.impostoPago = lucro * 0.225
-		} else if(diferencaDias > 180 && diferencaDias <= 360) {
-			vm.impostoPago = lucro * 0.2
-		} else if(diferencaDias > 360 && diferencaDias <= 720) {
-			vm.impostoPago = lucro * 0.175
-		} else {
-			vm.impostoPago = lucro * 0.15
-		}
-
-		vm.valorLiquido = vm.valorBruto - vm.impostoPago;
-		formatarValores();
-	}
-
-	const formatarValores = () => {
-		vm.valorAplicado = currencyFormatter.format(vm.valorAplicado, { currency: 'BRL' });
-		vm.valorBruto = currencyFormatter.format(vm.valorBruto, { currency: 'BRL' });;
-		vm.impostoPago = currencyFormatter.format(vm.impostoPago, { currency: 'BRL' });;
-		vm.valorLiquido = currencyFormatter.format(vm.valorLiquido, { currency: 'BRL' });;
-	}
-
-	vm.avancarPasso = () => {
-		vm.passoSimulacao++;
-
-		if(vm.passoSimulacao == 3) {
-			calcularInvestimento();
-		}
-	}
-
-	vm.aporteInicial = 0;
+	vm.aporteInicial = 10;
 	vm.aporteMensal = 0;
-	vm.valorAplicado = 0;
-	vm.valorBruto = 0;
-	vm.impostoPago = 0;
-	vm.valorLiquido = 0;
+	vm.todosSelecionados = false;
+
+	vm.selecionarTodos = () => {
+		vm.investimentos.forEach((investimento) => {
+			if(vm.todosSelecionados)
+				investimento.selecionado = true;
+			else
+				investimento.selecionado = false;
+		})
+	}
+
+	vm.simular = () => {
+		vm.investimentosCalculados = [];
+
+		let investimentosSelecionados = vm.investimentos.filter((investimento) => investimento.selecionado).map((investimento) => {
+			return {
+				instituicao: investimento.instituicao,
+				nome: investimento.nome,
+				taxa: investimento.taxa,
+				indexacao: investimento.indexacao,
+				vencimento: investimento.vencimento,
+				vencimentoFormatado: investimento.vencimentoFormatado,
+				selecionado: investimento.selecionado,
+				valorAplicado: 0,
+				valorLiquido: 0,
+				valorBruto: 0,
+				impostoPago: 0
+			}
+		});
+
+		investimentosSelecionados.forEach((investimento) => {
+			calcularInvestimento(investimento);
+		})
+	}
 
 	InvestimentoService.getInvestimentos().then((response) => {
 		vm.investimentos = response.data.map((investimento) => {
@@ -80,8 +70,9 @@ export default function InvestimentosController(InvestimentoService) {
 				nome: investimento.nome,
 				taxa: investimento.taxa,
 				indexacao: investimento.indexacao,
-				vencimento: moment(investimento.vencimento).format('DD/MM/YYYY'),
-				vencimentoFormatado: moment(investimento.vencimento).format('DD/MM/YYYY')
+				vencimento: investimento.vencimento,
+				vencimentoFormatado: moment(investimento.vencimento).format('DD/MM/YYYY'),
+				selecionado: false
 			}
 		});
 	});

@@ -2,7 +2,7 @@ import InvestimentosController from '/src/modules/investimentos/controllers/inve
 import route from '/src/modules/investimentos/route';
 import { InvestimentoService } from '../../services';
 
-//import '../../styles/investimentos.scss';
+import '../../styles/investimento.scss';
 
 const Informe = angular.module('app.investimentos', ['ui.router']).
 			controller('InvestimentosController', InvestimentosController).

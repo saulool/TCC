@@ -10,6 +10,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "express": "^4.16.2",
+    "moment": "^2.22.1",
     "mysql": "^2.15.0",
     "mysql-promise": "^4.1.0",
     "pg-promise": "^8.2.2"

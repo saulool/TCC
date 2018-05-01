@@ -5,12 +5,13 @@ import Lancamentos from '/src/modules/lancamentos';
 import Informe from '/src/modules/informe';
 import Cadastro from '/src/modules/cadastro';
 import Investimentos from '/src/modules/investimentos';
+import SituacaoFinanceira from '/src/modules/situacao-financeira';
 import moment from 'moment';
 
 moment().locale('pt-br');
 
 angular
-	.module('app', [Login, Home, Lancamentos, Informe, Cadastro, Investimentos, 'LocalStorageModule', 'chart.js', 'ui.utils.masks'])
+	.module('app', [Login, Home, Lancamentos, Informe, Cadastro, Investimentos, SituacaoFinanceira, 'LocalStorageModule', 'chart.js', 'ui.utils.masks'])
 	.controller('generalController', ($scope, localStorageService, $state, $rootScope) => {
 
 		if(localStorageService.get('usuario')){
