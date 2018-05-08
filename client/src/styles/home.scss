@@ -9,9 +9,16 @@
 	height: 300px;
 
 	.expenses-pie-chart {
+		display: table;
+		height: 300px;
 		width: 35%;
 		margin-right: 3%;
 		vertical-align: middle;
+
+		.no-expenses {
+			display: table-cell;
+			vertical-align: middle;
+		}
 	}
 
 	.account-balance-chart {

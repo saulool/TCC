@@ -6,13 +6,15 @@
     </div>
   </div>
   
-  <p>Parabéns, sua situação financeira se encontra em um nível acima do estável, isso significa que você está poupando mais do que gastando.</p>
-
+  <p ng-if="situacaoFinanceiraCtrl.pontuacao > 69">Parabéns, sua situação financeira se encontra em um nível acima do estável, isso significa que você está poupando mais do que gastando.</p>
+  <p ng-if="situacaoFinanceiraCtrl.pontuacao > 39 && situacaoFinanceiraCtrl.pontuacao < 70">Parabéns, você está conseguindo poupar mais do que gastar mas tente poupar ainda mais.</p>
+  <p ng-if="situacaoFinanceiraCtrl.pontuacao < 40"><b>Atenção</b>, você está poupando muito pouco ou gastando mais do que poupando, comece a reduzir seus custos.</p>
 
   <h2 class="text-center">Como melhorar minha situação financeira?</h2>
   <p>Você pode melhorar sua situação financeira através dos seguintes passos:</p>
   <ul>
-    <li>Tente reduzir seus gastos do tipo lazer. Eles ocupam 25% do seu orçamento</li>
-    <li>Realize investimentos para maximizar seus ganhos com o dinheiro que você poupou</li>
+    <li ng-repeat="dica in situacaoFinanceiraCtrl.dicas">{{dica}}</li>
+    <!-- <li>Tente reduzir seus gastos do tipo lazer. Eles ocupam 25% do seu orçamento</li>
+    <li>Realize investimentos para maximizar seus ganhos com o dinheiro que você poupou</li> -->
   </ul>
 </div>

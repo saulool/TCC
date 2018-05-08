@@ -1,9 +1,10 @@
 <div class="all">
 	<div class="charts">
-		<div class="expenses-pie-chart">
-			<canvas id="pie" class="chart chart-pie"
+		<div class="expenses-pie-chart text-center">
+			<canvas ng-if="homeCtrl.expensesChart.data.values.length > 0" id="pie" class="chart chart-pie"
 			  chart-data="homeCtrl.expensesChart.data.values" chart-labels="homeCtrl.expensesChart.data.labels" chart-options="homeCtrl.expensesChart.options">
 			</canvas>
+			<span class="no-expenses" ng-if="homeCtrl.expensesChart.data.values.length == 0">Não há despesas cadastradas para este mês</span>
 		</div>
 		<div class="account-balance-chart">
 			<canvas id="line" height="100" class="chart chart-line" chart-data="homeCtrl.accountBalanceChart.data.values"
@@ -28,6 +29,9 @@
 					<td>{{despesa.natureza}}</td>
 					<td>{{despesa.descricao}}</td>
 					<td>{{despesa.valor}}</td>
+				</tr>
+				<tr class="text-center" ng-if="homeCtrl.ultimasDespesas.length == 0">
+					<td colspan="4">Não há lançamentos para este mês</td>
 				</tr>
 			</tbody>
 		</table>

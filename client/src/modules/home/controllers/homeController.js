@@ -30,6 +30,9 @@ export default function HomeController(LancamentoService, localStorageService, C
 							return label + ': ' + currencyFormatter.format(datasetLabel, { currency: 'BRL' });
 						}
 					}
+				},
+				legend: {
+					display: true
 				}
 			},
 			data: {
