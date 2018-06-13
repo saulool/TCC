@@ -20,4 +20,11 @@ export default function LancamentoService($http) {
     vm.getLancamentosIR = (idUsuario) => {
         return $http.get(`${configuration.serverUrl}/api/lancamento/${idUsuario}/lancamentos-ir`);
     }
+
+    vm.adicionarLancamentosBanco = (idUsuario, agencia, conta) => {
+        return $http.post(`${configuration.serverUrl}/api/lancamento/${idUsuario}/lancamentos-banco`, {
+            agencia,
+            conta
+        });
+    }
 }

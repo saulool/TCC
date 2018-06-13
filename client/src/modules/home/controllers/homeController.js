@@ -33,7 +33,8 @@ export default function HomeController(LancamentoService, localStorageService, C
 				},
 				legend: {
 					display: true
-				}
+				},
+				maintainAspectRatio: false
 			},
 			data: {
 				labels: Object.keys(vm.tiposDespesas),
@@ -99,7 +100,8 @@ export default function HomeController(LancamentoService, localStorageService, C
 				},
 				legend: {
 					display: true
-				}
+				},
+				maintainAspectRatio: false
 			},
 			data: {
 				labels: Object.keys(totalDespesasUltimoAno),

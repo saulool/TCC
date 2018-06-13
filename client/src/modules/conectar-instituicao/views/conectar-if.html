@@ -1,0 +1,26 @@
+<div class="col-sm-6 col-sm-offset-3">
+  <h3>Conectar à instituição financeira</h3>
+  <p>Com essa opção os lançamentos de sua conta serão automaticamente cadastrados no aplicativo. Para isso preencha os dados abaixo:</p>
+  <div class="alert alert-danger" ng-if="conectarIFCtrl.error.hasError">
+      {{conectarIFCtrl.error.message}}
+    </div>
+  <form class="form-horizontal" name="conectarIFForm" ng-submit="conectarIFCtrl.conectar(conectarIFForm)" novalidate>
+    <div class="form-group">
+      <select class="form-control" ng-model="conectarIFCtrl.form.bancoSelecionado" ng-change="conectarIFCtrl.limparNaturezaLancamento()" required>
+        <option ng-repeat="banco in conectarIFCtrl.bancos" value="{{banco}}">{{ banco }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Agência*" ng-model="conectarIFCtrl.form.agencia" required>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Conta*" ng-model="conectarIFCtrl.form.conta" required>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" placeholder="Senha Internet*" ng-model="conectarIFCtrl.form.senha" required>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn-primary">Conectar</button>
+    </div>
+  </form>
+</div>

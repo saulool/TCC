@@ -36,6 +36,10 @@
 	margin: 0;
 }
 
+.no-margin-top {
+	margin-top: 0;
+}
+
 .no-padding {
 	padding: 0;
 }
@@ -65,4 +69,16 @@
 
 input.ng-invalid:not(.ng-pristine) {
 	border-color: red;
+}
+
+.menu {
+	.notificacoes {
+		padding: 15px 0;
+
+		.badge {
+			background-color: #f3aa00;
+			border: 1px solid #e8a200;
+			font-weight: normal;
+		}
+	}
 }

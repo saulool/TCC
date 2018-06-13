@@ -56,7 +56,7 @@ export default function LancamentosController(LancamentoService, TIPOS_LANCAMENT
 		CATEGORIAS_LANCAMENTOS.OUTROS
 	]
 
-	const limparForm = () => {
+	const limparForm = (form) => {
 		vm.form = {
 			descricao: null,
 			tipo: TIPOS_LANCAMENTOS.D,
@@ -69,6 +69,8 @@ export default function LancamentosController(LancamentoService, TIPOS_LANCAMENT
 			lancamentoRecorrente: false,
 			frequencia: null
 		}
+
+		form.$setPristine();
 	}
 
 	const converteValorKey = (object, valor) => {
@@ -113,7 +115,7 @@ export default function LancamentosController(LancamentoService, TIPOS_LANCAMENT
 			const lancamentos = vm.form.lancamentoRecorrente ? montarLancamentos(vm.form, vm.form.frequencia) : montarLancamentos(vm.form, 1);
 
 			LancamentoService.cadastrar(lancamentos).then(() => {
-				//limparForm();
+				limparForm(form);
 			}).catch((error) => {
 				lancarErro(errorUtils.handleError(error));
 			});

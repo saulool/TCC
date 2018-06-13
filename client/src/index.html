@@ -9,7 +9,7 @@
   </head>
 
   <body ng-app="app" ng-controller="generalController">
-    <nav class="navbar navbar-default navbar-fixed-top" ng-if=!paginaLogin>
+    <nav class="navbar navbar-default navbar-fixed-top menu" ng-if=!paginaLogin>
       <div class="container-fluid">
         <div class="navbar-header">
           <a ui-sref="home" class="navbar-brand">Family Budget</a>
@@ -23,7 +23,7 @@
               <a ui-sref="situacaoFinanceira">Situação Financeira</a>
             </li>
             <li>
-              <a href="#">Lançamentos Futuros</a>
+              <a ui-sref="lancamentosFuturos">Lançamentos Futuros</a>
             </li>
             <li>
               <a ui-sref="investimentos">Simular Investimentos</a>
@@ -31,12 +31,12 @@
             <li>
               <a ui-sref="informe">Informe IR</a>
             </li>
-            <li>
-              <a href="#">Conectar à Conta</a>
+            <li ng-if="!bancoConectado">
+              <a ui-sref="conectarIf">Conectar à Conta</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <!-- <li><a>Meu saldo: {{ saldo }}</a></li> -->
+            <li class="notificacoes" ng-if="numeroLancamentosProximos > 0" uib-popover-html="test" popover-trigger="'outsideClick'" popover-placement="left-top" popover-title="Notificações"><span class="badge">{{ numeroLancamentosProximos }}</span></li>
             <li><a ng-click="logout()" href="#">Sair</a></li>
           </ul>
         </div>

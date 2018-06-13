@@ -1,0 +1,26 @@
+<div class="lancamentos-futuros tabular-data">
+  <h1 class="titulo">Lançamentos Futuros - {{ lancamentosFuturosCtrl.mesAtual }}</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Tipo Lançamento</th>
+        <th>Descrição</th>
+        <th>Natureza</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-if="lancamentosFuturosCtrl.lancamentosFuturos.length > 0" ng-repeat="despesa in lancamentosFuturosCtrl.lancamentosFuturos">
+        <td>{{despesa.data}}</td>
+        <td>{{despesa.tipo}}</td>
+        <td>{{despesa.descricao}}</td>
+        <td>{{despesa.natureza}}</td>
+        <td>{{despesa.valor}}</td>
+      </tr>
+      <tr ng-if="lancamentosFuturosCtrl.lancamentosFuturos.length == 0">
+        <td colspan="6" class="center-text">Não foram encontrados lançamentos dedutíveis para o IR</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

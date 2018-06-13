@@ -4,7 +4,7 @@ import 'angular-local-storage';
 import 'angular-ui-bootstrap';
 import 'angular-input-masks';
 import 'ng-infinite-scroll';
-import 'bootstrap/dist/js/bootstrap';
+import 'bootstrap/dist/js/bootstrap.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import './styles/general.scss';

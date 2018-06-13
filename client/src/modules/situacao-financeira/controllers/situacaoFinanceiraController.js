@@ -69,8 +69,8 @@ export default function SituacaoFinanceiraController(LancamentoService, localSto
 
 	const ordenarDespesas = (despesas) => {
 		return despesas.sort((a, b) => {
-			if(Object.values(a) < Object.values(b)) return 1;
-			if(Object.values(a) > Object.values(b)) return -1;
+			if(Object.values(a)[0] < Object.values(b)[0]) return 1;
+			if(Object.values(a)[0] > Object.values(b)[0]) return -1;
 			return 0;
 		});
 	}

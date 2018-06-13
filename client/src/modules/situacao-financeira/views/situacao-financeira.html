@@ -11,10 +11,9 @@
   <p ng-if="situacaoFinanceiraCtrl.pontuacao < 40"><b>Atenção</b>, você está poupando muito pouco ou gastando mais do que poupando, comece a reduzir seus custos.</p>
 
   <h2 class="text-center">Como melhorar minha situação financeira?</h2>
-  <p>Você pode melhorar sua situação financeira através dos seguintes passos:</p>
+  <p ng-if="situacaoFinanceiraCtrl.pontuacao < 70">Você pode melhorar sua situação financeira através dos seguintes passos:</p>
+  <p ng-if="situacaoFinanceiraCtrl.pontuacao >= 70">Você já possui uma ótima situação financeira mas sempre é possível melhorar. Aqui estão algumas dicas:</p>
   <ul>
     <li ng-repeat="dica in situacaoFinanceiraCtrl.dicas">{{dica}}</li>
-    <!-- <li>Tente reduzir seus gastos do tipo lazer. Eles ocupam 25% do seu orçamento</li>
-    <li>Realize investimentos para maximizar seus ganhos com o dinheiro que você poupou</li> -->
   </ul>
 </div>

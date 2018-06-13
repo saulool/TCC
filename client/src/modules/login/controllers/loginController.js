@@ -24,14 +24,8 @@ export default function LoginController($state, UsuarioService, localStorageServ
 		UsuarioService.login(email, senha).then((responseData) => {
 			const usuario = responseData.data;
 			localStorageService.set('usuario', usuario);
-
-			// if(usuario.novoUsuario){
-			// 	$state.go('configuracao');
-			// }else{
-				$rootScope.$broadcast('LOGIN');
-				console.log(123);
-				$state.go('home');
-			//}
+			$rootScope.$broadcast('LOGIN');
+			$state.go('home');
 		}).catch((error) => {
 			throwError(errorUtils.handleError(error));
 		});
