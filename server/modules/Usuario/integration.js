@@ -34,11 +34,18 @@ const atualizarSaldo = (idUsuario, valor) => {
 	return __db.any(query, [idUsuario, valor]);
 }
 
+const setarBancoConectado = (idUsuario, agencia, conta) => {
+	const query = 'UPDATE usuario SET banco_conectado = true, agencia = $2, conta = $3 WHERE id_usuario = $1';
+
+	return __db.any(query, [idUsuario, agencia, conta]);
+}
+
 module.exports = {
 	login,
 	cadastro,
 	removeStatusNovoUsuario,
 	recuperarDados,
 	getSaldo,
-	atualizarSaldo
+	atualizarSaldo,
+	setarBancoConectado
 }

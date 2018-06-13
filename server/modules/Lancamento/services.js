@@ -82,8 +82,25 @@ const getLancamentosIR = (idUsuario) => {
 	});
 }
 
+const adicionarLancamentosBanco = (idUsuario, agencia, conta) => {
+	return new Promise((resolve, reject) => {
+		lancamentoIntegration.adicionarLancamentosBanco(idUsuario).then((response) => {
+			usuarioService.setarBancoConectado(idUsuario, agencia, conta).then(() => {
+				resolve();
+			}).catch((error) => {
+				console.log(error);
+				reject(error);
+			});
+		}).catch((error) => {
+			console.log(error, 2);
+			reject(error);
+		});
+	});
+}
+
 module.exports = {
 	getLancamentos,
 	cadastrar,
-	getLancamentosIR
+	getLancamentosIR,
+	adicionarLancamentosBanco
 }

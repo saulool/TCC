@@ -12,7 +12,7 @@ const login = (email, senha) => {
 				    sobrenome: response[0].sobrenome,
 				    email: response[0].email,
 				    novoUsuario: response[0].novo_usuario,
-				    saldo: response[0].saldo
+				    bancoConectado: response[0].banco_conectado
 				}
 
 				resolve(usuario);
@@ -69,25 +69,12 @@ const recuperarDados = (email) => {
 	});
 }
 
-const getSaldo = (idUsuario) => {
+const setarBancoConectado = (idUsuario, agencia, conta) => {
 	return new Promise((resolve, reject) => {
-		usuarioIntegration.getSaldo(idUsuario).then((response) => {
-			resolve(response[0])
-		});
-	});
-}
-
-const atualizarSaldo = (idUsuario, tipo, valor) => {
-	return new Promise((resolve, reject) => {
-		getSaldo(idUsuario).then((response) => {
-			const saldoAtual = response.saldo;
-			const saldoNovo = tipo === 'D' ? saldoAtual - valor : saldoAtual + valor;
-
-			usuarioIntegration.atualizarSaldo(idUsuario, saldoNovo).then((response) => {
-				resolve({
-					message: 'ok'
-				})
-			});
+		usuarioIntegration.setarBancoConectado(idUsuario, agencia, conta).then((response) => {
+			resolve();
+		}).catch((err) => {
+			reject(err);
 		});
 	});
 }
@@ -97,6 +84,5 @@ module.exports = {
 	cadastro,
 	removeStatusNovoUsuario,
 	recuperarDados,
-	getSaldo,
-	atualizarSaldo
+	setarBancoConectado
 }

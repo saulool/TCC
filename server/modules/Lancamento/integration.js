@@ -23,8 +23,21 @@ const getLancamentosIR = (idUsuario) => {
 	return __db.any(query, [idUsuario]);
 }
 
+const adicionarLancamentosBanco = (idUsuario) => {
+	let query = 
+		`INSERT INTO lancamentos(id_usuario, descricao, tipo, natureza, valor, data)	VALUES ($1, 'INSERIDO PELO BANCO - Mercado', 'D', 'ALIMENTACAO', 123.43, to_timestamp(CONCAT(to_char(NOW(),'YYYY-MM'), '-07'), 'YYYY MM DD'));
+		INSERT INTO lancamentos(id_usuario, descricao, tipo, natureza, valor, data)	VALUES ($1, 'INSERIDO PELO BANCO - Gasolina', 'D', 'LOCOMOCAO', 155.33, to_timestamp(CONCAT(to_char(NOW(),'YYYY-MM'), '-10'), 'YYYY MM DD'));
+		INSERT INTO lancamentos(id_usuario, descricao, tipo, natureza, valor, data)	VALUES ($1, 'INSERIDO PELO BANCO - Mercado', 'D', 'ALIMENTACAO', 123.43, to_timestamp(CONCAT(to_char(NOW() - INTERVAL '1 month','YYYY-MM'), '-07'), 'YYYY MM DD'));
+		INSERT INTO lancamentos(id_usuario, descricao, tipo, natureza, valor, data)	VALUES ($1, 'INSERIDO PELO BANCO - Gasolina', 'D', 'LOCOMOCAO', 155.33, to_timestamp(CONCAT(to_char(NOW() - INTERVAL '1 month','YYYY-MM'), '-10'), 'YYYY MM DD'));
+		INSERT INTO lancamentos(id_usuario, descricao, tipo, natureza, valor, data)	VALUES ($1, 'INSERIDO PELO BANCO - Mercado', 'D', 'ALIMENTACAO', 123.43, to_timestamp(CONCAT(to_char(NOW() - INTERVAL '2 month','YYYY-MM'), '-07'), 'YYYY MM DD'));
+		INSERT INTO lancamentos(id_usuario, descricao, tipo, natureza, valor, data)	VALUES ($1, 'INSERIDO PELO BANCO - Gasolina', 'D', 'LOCOMOCAO', 155.33, to_timestamp(CONCAT(to_char(NOW() - INTERVAL '2 month','YYYY-MM'), '-10'), 'YYYY MM DD'));`;
+
+	return __db.any(query, [idUsuario])
+}
+
 module.exports = {
 	getLancamentos,
 	cadastrar,
-	getLancamentosIR
+	getLancamentosIR,
+	adicionarLancamentosBanco
 }

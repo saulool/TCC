@@ -27,10 +27,18 @@ module.exports = (app) => {
 
     app.get('/api/lancamento/:idUsuario/lancamentos-ir', (req, res) => {
         lancamentoService.getLancamentosIR(req.params.idUsuario).then((response) => {
-        	console.log(response);
-        	res.send(response);
+            console.log(response);
+            res.send(response);
         }).catch((error) => {
-			res.status(500).send(error);
+            res.status(500).send(error);
+        });
+    });
+
+    app.post('/api/lancamento/:idUsuario/lancamentos-banco', (req, res) => {
+        lancamentoService.adicionarLancamentosBanco(req.params.idUsuario, req.body.agencia, req.body.conta).then((response) => {
+            res.send();
+        }).catch((error) => {
+            res.status(500).send(error);
         });
     });
 }
