@@ -13,11 +13,11 @@
 		height: 300px;
 		width: 50%;
 		vertical-align: middle;
+	}
 
-		.no-expenses {
-			display: table-cell;
-			vertical-align: middle;
-		}
+	.no-expenses {
+		display: block;
+		text-align: center;
 	}
 
 	.account-balance-chart {

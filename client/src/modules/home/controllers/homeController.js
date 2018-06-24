@@ -7,6 +7,8 @@ export default function HomeController(LancamentoService, localStorageService, C
 	const vm = this;
 	const usuario = localStorageService.get('usuario');
 
+	vm.expensesChart =  vm.ultimasDespesas = vm.accountBalanceChart = [];
+
 	const lancamentosEntreDatas = (dataLancamento, tipoIntervaloInicio, tipoIntervaloFim = tipoIntervaloInicio) => dataLancamento >= moment().startOf(tipoIntervaloInicio) && dataLancamento <= moment().endOf(tipoIntervaloFim);
 
 	const montarDespesasMes = (lancamentos) => {
@@ -142,10 +144,12 @@ export default function HomeController(LancamentoService, localStorageService, C
 			}
 		});
 
+
 		montarUltimasDespesas(lancamentos);
 
 		montarDespesasMes(lancamentos);
 
 		montarGraficoAno(lancamentos);
+
 	});
 }

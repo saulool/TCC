@@ -1,5 +1,5 @@
 <div class="situacao-financeira">
-  <h2 class="text-center">Sua situação financeira: {{ situacaoFinanceiraCtrl.pontuacao }}</h2>
+  <h2 class="text-center">Sua situação financeira: {{ situacaoFinanceiraCtrl.pontuacao }}/100</h2>
 
   <div class="progress">
     <div class="progress-bar" ng-class="{ 'progress-bar-success' : situacaoFinanceiraCtrl.pontuacao > 69, 'progress-bar-danger' : situacaoFinanceiraCtrl.pontuacao < 40, 'progress-bar-warning' : situacaoFinanceiraCtrl.pontuacao > 39 && situacaoFinanceiraCtrl.pontuacao < 70 }" style="width: {{situacaoFinanceiraCtrl.pontuacao}}%">

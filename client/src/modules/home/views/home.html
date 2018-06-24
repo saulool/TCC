@@ -5,18 +5,18 @@
 			<canvas ng-if="homeCtrl.expensesChart.data.values.length > 0" id="pie" class="chart chart-pie"
 			  chart-data="homeCtrl.expensesChart.data.values" chart-labels="homeCtrl.expensesChart.data.labels" chart-options="homeCtrl.expensesChart.options">
 			</canvas>
-			<span class="no-expenses" ng-if="homeCtrl.expensesChart.data.values.length == 0">Não há despesas cadastradas para este mês</span>
+			<span class="no-expenses" ng-if="homeCtrl.expensesChart.length == 0 || homeCtrl.expensesChart.data.values.length == 0">Não há despesas cadastradas para este mês</span>
 		</div>
 		<div class="account-balance-chart">
 			<h3 class="text-center no-margin-top">Lançamentos dos últimos 12 meses</h3>
-			<canvas id="line" class="chart chart-line" chart-data="homeCtrl.accountBalanceChart.data.values"
+			<canvas ng-if="homeCtrl.expensesChart.data.values.length > 0" id="line" class="chart chart-line" chart-data="homeCtrl.accountBalanceChart.data.values"
 			chart-labels="homeCtrl.accountBalanceChart.data.labels" chart-series="homeCtrl.accountBalanceChart.data.series" chart-options="homeCtrl.accountBalanceChart.options">
 			</canvas>
-			<span class="no-expenses" ng-if="homeCtrl.accountBalanceChart.data.values.length == 0">Não há despesas cadastradas</span>
+			<span class="no-expenses" ng-if="homeCtrl.accountBalanceChart.length == 0 || homeCtrl.accountBalanceChart.data.values.length == 0">Não há despesas cadastradas</span>
 		</div>
 	</div>
 	<div class="tabular-data">
-		<h2>Últimos lançamentos</h2>
+		<h2>Últimos lançamentos{{homeCtrl.expensesChart.length > 0}}</h2>
 		<table class="table table-striped">
 			<thead>
 				<tr>
